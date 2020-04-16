@@ -1,3 +1,7 @@
+/* This is for EECS 368 with professor Andy Gill at the University of Kansas 
+  April 16th 2020
+  Authored by Chase Odgers, using P5.js libraries and tips from The Coding Train youtube channel
+ */
 var pieces= [];
 var player1 = 1;
 var player2 = 2;
