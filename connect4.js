@@ -6,7 +6,7 @@ var row = 0;
 var currentPlayer = 1;
 var winner = 0;
 let board = []
-
+//Setup is a required function for P5.js and it handles the drawing and reset of everything on the board as well as filling the array with 0's to then be marked
 function setup() {
   createCanvas(1000, 1000);
   playerBanner();
@@ -15,6 +15,7 @@ function setup() {
   button.mousePressed(resetSketch);
   resetSketch();
 }
+//mouse pressed handles the entire program, registering mouse location and using that information to inform reactions within other functions
 function mousePressed(){
   columnSelect(mouseX,mouseY);
   rowSet();
@@ -28,6 +29,7 @@ function mousePressed(){
   showPlayer();
   console.log('currentplayer:' + currentPlayer);
 }}}
+//set current player is used to set which player is currently at turn
 function setCurrentPlayer(){
   if(currentPlayer == 1){
     currentPlayer = 2;
@@ -38,6 +40,7 @@ function setCurrentPlayer(){
   //  console.log(currentPlayer);
   }
 }
+//column select takes in the mouse x, y location from mouse pressed and determines which column the user must have clicked on
 function columnSelect(_x,_y){
   x= _x;
   y= _y;
@@ -88,6 +91,7 @@ function columnSelect(_x,_y){
   //  console.log(column);
   }
 }
+//row set reads through the board array and determines where the first empty row in the selected column is, then sets the row variable to that row
 function rowSet(){
   row = -1;
   for(let i=5; i>=0; i--){
@@ -97,6 +101,7 @@ function rowSet(){
     }
   }
 }
+//vertical win iterates over the array checking for 4 of the players numbers in a row (either four 1s for player one or four 2s four player 2) just vertical WINS
 function verticalWin(){
   for(let x=0; x<7; x++){
     for(let y=0; y<4; y++){
@@ -109,14 +114,17 @@ function verticalWin(){
     }
   }
 }
+//match check takes in 4 values from get piece and if all four match and are not out undefined or 0 then it pronounces a win
 function matchCheck(one,two,three,four){
   return(one===two && one===three && one===four && one !== undefined && one !== 0);
 }
+//get piece takes in an x and a y value and returns the value within the array at that point
 function getPiece(_x,_y){
   x=_x
   y=_y
   return(board[x][y]);
 }
+//horizontal win checks for 4 pieces horizontally
 function horizontalWin(){
   for(let y=0; y<6; y++){
     for(let x=0; x<4; x++){
@@ -129,6 +137,7 @@ function horizontalWin(){
     }
   }
 }
+//diagonal win checks for a win top to bottom diagonal or bottom to top diagonal
 function diagonalWin(){
   for(let y=0; y<6; y++){
     for(let x=0; x<4; x++){
@@ -151,6 +160,7 @@ function diagonalWin(){
     }
 }
 }
+//winMessage is what displays once a win has been detected
 function winMessage(){
   strokeWeight(2);
   stroke(50);
@@ -159,6 +169,7 @@ function winMessage(){
   fill(50);
   text('Player '+ winner + ' WINS!!', 175,300);
 }
+//reset board is unused
 function resetBoard(){
   for(let x=0; x<7;x++){
     board[x]=[];
@@ -168,6 +179,7 @@ function resetBoard(){
     }
   }
 }
+//add piece draws a circle at the row column location determined by get row get column
 function addPiece(){
   if (currentPlayer == 1){
     noStroke();
@@ -183,9 +195,11 @@ function addPiece(){
     board[column][row] = currentPlayer;
   }
 }
+//draw is required for P5.js but is unused in this program
 function draw() {
 
 }
+//show player is what highlights either player 1 or player 2 to demonstrate turn
 function showPlayer(){
   if(currentPlayer == 1){
     noFill();
@@ -205,6 +219,7 @@ function showPlayer(){
     noErase();
   }
 }
+//player banner creates the rectangles and text on the side of the game board saying player 1 or player 2
 function playerBanner(){
   stroke(50);
   strokeWeight(1);
@@ -221,6 +236,7 @@ function playerBanner(){
   fill('black');
   text('Player 2', 725, 185);
 }
+//reset sketch is tied to the reset button as well as in the setup function and is used to set the board back to position 0
 function resetSketch(){
   board1 = new Board();
   board1.show();
@@ -232,6 +248,7 @@ function resetSketch(){
     }
   }
 }
+//Board Class handles the drawing of the circles and rectangle that make up the game board, member function show is called in setup
 class Board{
   constructor(){
 
